@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'test-project';
+  formConfig = [
+    {formControlName: 'name', label: 'Имя', type: 'text'},
+  ]
 }
