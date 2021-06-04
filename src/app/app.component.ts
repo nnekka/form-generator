@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -7,35 +8,41 @@ import {FormControl, FormGroup} from '@angular/forms';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'test-project';
 
   form: FormGroup
-  formConfig = [
-    {formControlName: 'name', label: 'Имя', type: 'text', required: false},
-    {formControlName: 'age', label: 'Возраст', type: 'select', required: true, options: [20, 23, 25]},
-    {formControlName: 'input', label: 'Вооот', type: 'checkbox'},
-    {formControlName: 'input2', label: 'Так', type: 'checkbox'},
-  ]
+  formConfig = []
 
-  constructor(){}
+  constructor(
+    private http: HttpClient
+  ){}
 
   ngOnInit(): void{
     this.form =  new FormGroup({})
-    this.buildForm(this.formConfig)
+    this.http.get('http://localhost:2000/formConfig-1')
+      .subscribe(
+        (formConfig) => {
+          this.formConfig = formConfig
+          this.buildForm(this.formConfig)
+        }
+      )
+
   }
 
-  // onCheckChange(value, name){
-  //   this.form.get(`${name}`).setValue(value)
-  // }
 
   buildForm(config){
     config.forEach(item => {
       this.form.setControl(`${item.formControlName}`, new FormControl(null))
     })
-
   }
+
   onReset(){
-    this.form.reset()
+    this.form.reset({
+      name: 'Bbb',
+      age: 23,
+      skills: [
+        'js'
+      ]
+    })
   }
 
   onSubmit(){

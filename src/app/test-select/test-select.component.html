@@ -1,0 +1,7 @@
+<select
+  [formControlName]="formControlName"
+  (input)="onChange($event.target.value)"
+  (blur)="onTouched()"
+>
+  <option *ngFor="let option of options" [value]="option">{{option}}</option>
+</select>
