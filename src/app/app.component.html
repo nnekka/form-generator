@@ -14,10 +14,14 @@
     </span>
 
     <span *ngIf="item.type == 'text' || item.type == 'number'">
-     <input
-       [type]="item.type"
-       [formControlName]="item.formControlName"
-     >
+     <!--<input-->
+       <!--[type]="item.type"-->
+       <!--[formControlName]="item.formControlName"-->
+     <!--&gt;-->
+      <app-test-input
+        [type]="item.type"
+        [formControlName]="item.formControlName"
+      ></app-test-input>
     </span>
 
 

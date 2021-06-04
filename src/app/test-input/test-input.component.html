@@ -1,1 +1,6 @@
-<input>
+<input
+  [formControlName]="formControlName"
+  [type]="type"
+  (input)="onChange($event.target.value)"
+  (blur)="onTouched()"
+>
